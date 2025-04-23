@@ -73,7 +73,6 @@ class Drone2dBudgetHierarchyEnv(Drone2dBudgetEnv):
 
                 # Specify map_location for CPU loading if model was saved on GPU
                 checkpoint = torch.load(path, map_location=torch.device('cpu'))
-                # Check common key names for the state dict
                 state_dict_key = "model_state_dict"
                 if state_dict_key not in checkpoint:
                     raise KeyError(f"Could not find key '{state_dict_key}' or recognize state dict in checkpoint: {path}")
@@ -163,7 +162,7 @@ class Drone2dBudgetHierarchyEnv(Drone2dBudgetEnv):
             pos_y,
             effective_target_x,
             effective_target_y
-        ], dtype=np.float32) # Ensure correct dtype
+        ], dtype=np.float32)
 
         # Sanity check the shape
         if low_level_observation.shape[0] != self.low_level_observation_space.shape[0]:
@@ -172,8 +171,6 @@ class Drone2dBudgetHierarchyEnv(Drone2dBudgetEnv):
 
         return low_level_observation
 
-    # Rendering is inherited from Drone2dBudgetEnv and should work.
-    # We might add visualization for the high-level action later if needed.
     def render(self):
         """ Renders the environment, potentially adding high-level action display. """
         super().render()
@@ -310,9 +307,9 @@ class Drone2dBudgetPackageHierarchyEnv(Drone2dBudgetHierarchyEnv, Drone2dBudgetP
 
 if __name__ == '__main__':
 
-    POLICY_GOTO_TARGET = ""
-    POLICY_GOTO_BATTERY = ""
-    POLICY_GOTO_PACKAGE = ""
+    POLICY_GOTO_TARGET = "checkpoints/worker.pt"
+    POLICY_GOTO_BATTERY = "checkpoints/worker.pt"
+    POLICY_GOTO_PACKAGE = "checkpoints/worker.pt"
 
     LOW_LEVEL_ENV_ID = "Drone2D-v0"
 
@@ -390,7 +387,6 @@ if __name__ == '__main__':
 
             obs, reward, terminated, truncated, info = env_package_h.step(selected_action)
             total_reward += reward
-            # env_package_h.render() # Render is called inside step
 
             if terminated or truncated:
                 print(f"Package Hierarchy Episode finished! Total reward: {total_reward:.2f}, Info: {info}")
