@@ -284,7 +284,7 @@ class Drone2dBudgetEnv(Drone2dEnv):
         self._render_cooldown_indicator()
 
         # Draw the text info using the layout specific to this class
-        self._render_text_info() # Calls the overridden _render_text_info below
+        # self._render_text_info() # Calls the overridden _render_text_info below
 
     # --- Specific Rendering Methods for Budget Env ---
 
@@ -307,8 +307,8 @@ class Drone2dBudgetEnv(Drone2dEnv):
         battery_ratio = np.clip(self.battery / self.max_battery, 0.0, 1.0)
         gauge_x = 10
         gauge_y = 10 # Position at top-left
-        gauge_width = 100
-        gauge_height = 20
+        gauge_width = 200
+        gauge_height = 40
 
         if battery_ratio >= 0.7: color = (0, 255, 0) # Green
         elif battery_ratio >= 0.3: color = (255, 255, 0) # Yellow
@@ -324,8 +324,8 @@ class Drone2dBudgetEnv(Drone2dEnv):
         """Draws an indicator when battery refill is on cooldown."""
         if not self.screen or not self.font or self.battery_cooldown <= 0: return
 
-        indicator_x = 120 # Position next to battery gauge
-        indicator_y = 10
+        indicator_x = 220 # Position next to battery gauge
+        indicator_y = 20
         radius = 10
 
         pygame.draw.circle(self.screen, (255, 140, 0), (indicator_x + radius, indicator_y + radius), radius) # Orange circle

@@ -495,7 +495,7 @@ class Drone2dEnv(gym.Env):
             return
 
         # --- Drawing Text Info ---
-        self._render_text_info() # Call the existing text rendering method
+        # self._render_text_info() # Call the existing text rendering method
 
     # --- Finalizes the frame ---
     def _finalize_render(self):

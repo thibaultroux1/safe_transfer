@@ -274,8 +274,8 @@ class Drone2dBudgetPackageHierarchyEnv(Drone2dBudgetHierarchyEnv, Drone2dBudgetP
         self._render_background()
         self._render_environment_elements()
         self._render_hud_elements()
-        if self.font:
-             self._render_high_level_action() # Call the helper
+        # if self.font:
+            #  self._render_high_level_action() # Call the helper
         self._finalize_render()
 
 

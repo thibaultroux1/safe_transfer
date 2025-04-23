@@ -98,7 +98,7 @@ def evaluate_agent(args: Args):
     envs = gym.vector.SyncVectorEnv([lambda: gym.make(args.env_id, **args.env_kwargs)])
     agent = Agent(envs)
     checkpoint = torch.load(args.model_path, map_location='cpu')
-    # Use strict=True (default) for evaluation to ensure model exactly matches
+
     agent.load_state_dict(checkpoint["model_state_dict"])
     agent.eval()
 
