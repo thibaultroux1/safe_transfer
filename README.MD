@@ -59,15 +59,18 @@ The primary goal of this repository is for reviewers to verify the reproducibili
 #### Using Pip (optionally with Venv)
 
 ```bash
-# Clone the repository
-git clone [repository_url]
-
-# Navigate to the repository folder
-cd [path/to/repository]
+# Download the repository (anonymous git doesn't handle cloning) and extract it
+# You can also manually download it by clicking Download Repository
+curl https://anonymous.4open.science/api/repo/safe_hierarchical_transfer/zip --output safe_transfer.zip
+unzip safe_transfer.zip -d safe_transfer/
+rm safe_transfer.zip
 
 # (Optional) Create and activate the virtual environment
 python -m venv safe_transfer_venv
-source venv safe_transfer_venv/bin/activate
+source safe_transfer_venv/bin/activate
+
+# Navigate to the repository folder
+cd safe_transfer/
 
 # Install the package (optionally as editable)
 pip install -e .
@@ -88,8 +91,9 @@ To visualize the behavior of these policies, one can use the following commands.
 python visualize_continuous.py  \
     --env_id Drone2D-v0 \
     --num_episodes 10 \
-    --model_path checkpoints/worker.pt\
+    --model_path checkpoints/worker.pt
 ```
+> You can change the location of the red target point with a left click
 
 **Visualize the source manager policy:**
 ```bash
@@ -100,6 +104,8 @@ python visualize_discrete.py \
     --env.env_ids '["Drone2D-v0", "Drone2D-v0"]' \
     --env.low_level_policies_paths '["checkpoints/worker.pt","checkpoints/worker.pt"]'
 ```
+> You can change the location of the red target point with a left click, and the battery with a right click
+
 **Visualize the target manager policy:**
 ```bash
 python visualize_discrete.py \
@@ -109,6 +115,7 @@ python visualize_discrete.py \
     --env.env_ids '["Drone2D-v0", "Drone2D-v0", "Drone2D-v0"]' \
     --env.low_level_policies_paths '["checkpoints/worker.pt","checkpoints/worker.pt","checkpoints/worker.pt"]'
 ```
+> You can change the location of the red target point with a left click, the battery with a right click and the package with a middle click.
 
 ### Retrain from scratch
 
@@ -133,7 +140,7 @@ This step trains the high-level manager policy for the source task (e.g., "Reach
 
 ```bash
 python train_discrete.py \
-    --env-id Drone2D-budget-package-v0 \
+    --env-id Drone2D-budget-package-hierarchical-v0 \
     --env.low_level_policies_paths '["checkpoints/worker.pt","checkpoints/worker.pt"]' \
     --env.env_ids '["Drone2D-v0", "Drone2D-v0"]' \
     --total-timesteps 50_000_000 \
