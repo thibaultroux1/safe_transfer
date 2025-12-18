@@ -1,4 +1,4 @@
-# Code for Paper "Preserving Safety While Learning New Skills: A Transfer Approach for Hierarchical RL"
+# Code for Paper "Managing Critical Resources While Learning New Skills: A Transfer Approach for Hierarchical RL"
 
 This repository contains the code for the paper "Preserving Safety While Learning New Skills: A Transfer Approach for Hierarchical RL". The code is implementing the proposed safe hierarchical transfer approach using Elastic Weight Consolidation (EWC). It allows training and evaluating agents on a custom 2D drone simulation.
 
